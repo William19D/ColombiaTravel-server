@@ -156,6 +156,24 @@ public class AgenciaViajes {
 
     }
 
+    public void agregarCliente(Cliente c) throws Exception{
+//Hacer todas las validaciones necesarias
+        clientes.add(c);
+        escribirClientes();
+        log.info("Cliente agregado correctamente");
+    }
+
+    public void escribirClientes(){
+        try {
+            ArchivoUtils.serializarObjeto( RUTACLIENTES, clientes );
+        } catch (IOException e) {
+            log.severe(e.getMessage());
+        }
+    }
+    public ArrayList<Cliente> listarClientes() {
+        return clientes;
+    }
+
     private boolean existeArchivoSerializable(String NOMBRE_ARCHIVO) {
         File archivo = new File(NOMBRE_ARCHIVO);
         return archivo.exists() && archivo.isFile() && archivo.length() > 0;
